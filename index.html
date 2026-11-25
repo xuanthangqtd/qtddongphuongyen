@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Quỹ tín dụng nhân dân Đông Phương Yên - Hợp tác cùng phát triển</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       1. HỆ THỐNG BIẾN MÀU & CHẾ ĐỘ SÁNG / TỐI (LIGHT / DARK THEME TOKENS)
+       ========================================================================== */
+    :root {
+      --bg: #ffffff;
+      --bg2: #f4f7fc;
+      --tx: #141821;
+      --tx2: #364152;
+      --blue: #0a63e6;
+      --blue-d: #0b3d91;
+      --blue-soft: rgba(10, 99, 230, 0.1);
+      --red: #d0161c;
+      --green: #0f8a4b;
+      --card: #ffffff;
+      --line: #cbd5e6;
+      --nav: rgba(255, 255, 255, 0.86);
+      --glass: rgba(255, 255, 255, 0.80);
+      --sec: rgba(255, 255, 255, 0.74);
+      --sec2: rgba(235, 243, 255, 0.78);
+      
+      /* Bảng màu phong cảnh SVG ban ngày */
+      --sky1: #6db3ff;
+      --sky2: #d6eaff;
+      --hill: #8fbbe3;
+      --cb2: #7fa6d8;
+      --cb1: #4f7fc4;
+      --win: #fff6cf;
+      --f1: #8fd16f;
+      --f2: #6bbd4f;
+      --f3: #4aa63c;
+      --tree: #2f8a3f;
+      --roof: #2f66c8;
+      --wall: #ffffff;
+      --road: #e6dcc0;
+      --sun: #ffd66b;
+      --cl: 0.78;
+      --glw: 1;
+      --star: 0;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0b0f17;
+        --bg2: #111726;
+        --tx: #f3f6fc;
+        --tx2: #cbd5e6;
+        --blue: #4c9aff;
+        --blue-d: #9cc4ff;
+        --blue-soft: rgba(76, 154, 255, 0.16);
+        --red: #ff5a60;
+        --green: #34d399;
+        --card: #151c2c;
+        --line: #323e57;
+        --nav: rgba(11, 15, 23, 0.86);
+        --glass: rgba(21, 28, 44, 0.78);
+        --sec: rgba(11, 15, 23, 0.78);
+        --sec2: rgba(17, 23, 38, 0.82);
+
+        /* Bảng màu phong cảnh SVG ban đêm */
+        --sky1: #060b1a;
+        --sky2: #13264d;
+        --hill: #14233f;
+        --cb2: #1b2d52;
+        --cb1: #243a6a;
+        --win: #ffd980;
+        --f1: #153a2a;
+        --f2: #1b4a33;
+        --f3: #225c3e;
+        --tree: #0f3a28;
+        --roof: #4c9aff;
+        --wall: #c9d6f2;
+        --road: #3a4560;
+        --sun: #eef3ff;
+        --cl: 0.08;
+        --glw: 0.28;
+        --star: 0.85;
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0b0f17;
+      --bg2: #111726;
+      --tx: #f3f6fc;
+      --tx2: #cbd5e6;
+      --blue: #4c9aff;
+      --blue-d: #9cc4ff;
+      --blue-soft: rgba(76, 154, 255, 0.16);
+      --red: #ff5a60;
+      --green: #34d399;
+      --card: #151c2c;
+      --line: #323e57;
+      --nav: rgba(11, 15, 23, 0.86);
+      --glass: rgba(21, 28, 44, 0.78);
+      --sec: rgba(11, 15, 23, 0.78);
+      --sec2: rgba(17, 23, 38, 0.82);
+
+      --sky1: #060b1a;
+      --sky2: #13264d;
+      --hill: #14233f;
+      --cb2: #1b2d52;
+      --cb1: #243a6a;
+      --win: #ffd980;
+      --f1: #153a2a;
+      --f2: #1b4a33;
+      --f3: #225c3e;
+      --tree: #0f3a28;
+      --roof: #4c9aff;
+      --wall: #c9d6f2;
+      --road: #3a4560;
+      --sun: #eef3ff;
+      --cl: 0.08;
+      --glw: 0.28;
+      --star: 0.85;
+      color-scheme: dark;
+    }
+
+    /* ==========================================================================
+       2. CẤU TRÚC CƠ BẢN & TYPOGRAPHY
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 68px;
+      background: var(--sky2);
+      text-rendering: optimizeLegibility;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    body {
+      background: transparent;
+      color: var(--tx);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16.5px;
+      font-weight: 500;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    /* ==========================================================================
+       3. NỀN PHONG CẢNH SVG CỐ ĐỊNH (LÀNG QUÊ & ĐÔ THỊ)
+       ========================================================================== */
+    .scene {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .scene svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .st1 { stop-color: var(--sky1); transition: stop-color 0.4s ease; }
+    .st2 { stop-color: var(--sky2); transition: stop-color 0.4s ease; }
+
+    /* ==========================================================================
+       4. THANH ĐIỀU HƯỚNG (NAVBAR + MOBILE MENU + THEME TOGGLE)
+       ========================================================================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--nav);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1.5px solid var(--line);
+    }
+
+    nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 62px;
+      gap: 12px;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      letter-spacing: -0.01em;
+    }
+
+    .logo i {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #4c9aff, #0a63e6);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-style: normal;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(10, 99, 230, 0.3);
+    }
+
+    nav ul.nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      padding: 0;
+      font-size: 14.5px;
+      font-weight: 600;
+    }
+
+    nav ul.nav-links a {
+      padding: 6px 4px;
+      transition: color 0.2s;
+    }
+
+    nav ul.nav-links a:hover,
+    nav ul.nav-links a.active {
+      color: var(--blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      background: var(--card);
+      color: var(--tx);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .icon-btn:hover {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .icon-btn svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    #menuBtn {
+      display: none;
+    }
+
+    /* Menu thả xuống cho thiết bị di động */
+    .mobile-drawer {
+      display: none;
+      flex-direction: column;
+      background: var(--card);
+      border-bottom: 1.5px solid var(--line);
+      padding: 12px 22px 20px;
+      gap: 6px;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.14);
+    }
+
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    .mobile-drawer a {
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15.5px;
+      transition: background 0.2s;
+    }
+
+    .mobile-drawer a:hover {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    /* ==========================================================================
+       5. MENU NHANH BÊN CẠNH (DESKTOP SIDEBAR)
+       ========================================================================== */
+    .side {
+      position: fixed;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 25;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      padding: 9px;
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid var(--line);
+      border-radius: 26px;
+      box-shadow: 0 16px 40px rgba(10, 60, 160, 0.16);
+    }
+
+    .side a {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      height: 42px;
+      padding: 0 12px;
+      border-radius: 16px;
+      color: var(--tx2);
+      font-size: 13.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .side svg {
+      width: 19px;
+      height: 19px;
+      flex: none;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .side span {
+      display: none;
+    }
+
+    .side a:hover {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .side a.on {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    @media (min-width: 1280px) {
+      .side { display: flex; }
+      .side:hover span { display: inline; }
+    }
+
+    @media (min-width: 1580px) {
+      .side span { display: inline; }
+    }
+
+    /* ==========================================================================
+       6. NÚT BẤM (BUTTONS)
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--blue);
+      color: #fff;
+      border: 1.5px solid transparent;
+      border-radius: 980px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.15s, filter 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 18px rgba(10, 99, 230, 0.24);
+    }
+
+    .btn.sm {
+      padding: 8px 16px;
+      font-size: 13.5px;
+    }
+
+    .btn.outline {
+      background: var(--glass);
+      color: var(--blue);
+      border-color: var(--blue);
+      box-shadow: none;
+    }
+
+    .btn:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       7. PHẦN HERO (BANNER ĐẦU TRANG)
+       ========================================================================== */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 96px 0 84px;
+    }
+
+    .hero .wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 980px;
+      background: var(--glass);
+      border: 1.5px solid var(--line);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 20px;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero p.org {
+      color: var(--red);
+      font-weight: 800;
+      font-size: clamp(26px, 5.6vw, 66px);
+      letter-spacing: 0.025em;
+      line-height: 1.14;
+      margin: 0 auto 22px;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.9), 0 10px 28px rgba(208, 22, 28, 0.26);
+    }
+
+    :root[data-theme="dark"] .hero p.org {
+      text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5), 0 10px 30px rgba(255, 90, 96, 0.36);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .hero p.org {
+        text-shadow: 0 2px 0 rgba(0, 0, 0, 0.5), 0 10px 30px rgba(255, 90, 96, 0.36);
+      }
+    }
+
+    .hero p.org::after {
+      content: "";
+      display: block;
+      width: 104px;
+      height: 5px;
+      border-radius: 5px;
+      background: linear-gradient(90deg, #d0161c, #ff6b6f);
+      margin: 20px auto 0;
+    }
+
+    .hero h1 {
+      display: inline-block;
+      font-size: clamp(16px, 2.6vw, 28px);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: #fff;
+      background: linear-gradient(120deg, #0b3d91, #0a63e6 60%, #2f9bff);
+      padding: 13px 32px;
+      border-radius: 980px;
+      box-shadow: 0 12px 30px rgba(10, 99, 230, 0.34);
+      max-width: 100%;
+      margin: 0 auto 24px;
+    }
+
+    .hero .desc {
+      max-width: 680px;
+      margin: 0 auto 30px;
+      font-size: 17.5px;
+      font-weight: 600;
+      color: var(--tx);
+    }
+
+    .hero .row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      position: absolute;
+      z-index: 2;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid var(--line);
+      border-radius: 20px;
+      padding: 14px 20px;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-align: left;
+      box-shadow: 0 14px 34px rgba(10, 60, 160, 0.16);
+      animation: float 9s ease-in-out infinite;
+    }
+
+    .chip b {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .c1 { left: 4%; bottom: 52px; }
+    .c2 { right: 4%; top: 82px; animation-delay: -4s; }
+
+    @keyframes float {
+      50% { transform: translateY(-14px); }
+    }
+
+    /* ==========================================================================
+       8. CÁC SECTION & THẺ NỘI DUNG (SECTIONS, CARDS, TABLES)
+       ========================================================================== */
+    section {
+      padding: 80px 0;
+      background: var(--sec);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-top: 1px solid rgba(195, 205, 224, 0.35);
+    }
+
+    section.alt {
+      background: var(--sec2);
+    }
+
+    h2 {
+      font-size: clamp(26px, 4.2vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      text-align: center;
+    }
+
+    .sub {
+      text-align: center;
+      color: var(--tx2);
+      font-size: 18px;
+      font-weight: 500;
+      max-width: 660px;
+      margin: 12px auto 42px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 10px 28px rgba(10, 60, 160, 0.07);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(10, 60, 160, 0.14);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--tx2);
+      font-size: 15.5px;
+    }
+
+    .card .big {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    /* Bảng số liệu */
+    .tbl {
+      overflow-x: auto;
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 10px 28px rgba(10, 60, 160, 0.07);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px;
+    }
+
+    th, td {
+      padding: 15px 22px;
+      text-align: left;
+      font-size: 15.5px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      color: var(--tx);
+      font-weight: 700;
+      font-size: 14px;
+      background: var(--blue-soft);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td {
+      font-weight: 600;
+    }
+
+    td.r {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .note {
+      color: var(--tx2);
+      font-size: 14px;
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    /* Dải thống kê nổi bật */
+    section.band {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(120deg, #0b3d91, #0a63e6, #2f9bff, #0a63e6, #0b3d91);
+      background-size: 300% 300%;
+      animation: shift 16s ease infinite;
+    }
+
+    @keyframes shift {
+      50% { background-position: 100% 50%; }
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .stats b {
+      display: block;
+      font-size: 42px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .stats span {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    section.band .note {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ==========================================================================
+       9. CÔNG CỤ TÍNH LÃI TIẾT KIỆM & KHOẢN VAY (CALCULATORS)
+       ========================================================================== */
+    .calc {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      padding: 30px;
+      margin-top: 28px;
+      box-shadow: 0 10px 28px rgba(10, 60, 160, 0.07);
+    }
+
+    .calc-field {
+      margin-top: 16px;
+    }
+
+    .calc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--tx2);
+      margin-bottom: 8px;
+    }
+
+    .money-input-wrap {
+      display: inline-flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      padding: 4px 10px;
+      gap: 6px;
+    }
+
+    .money-input-wrap input {
+      width: 130px;
+      border: 0;
+      background: transparent;
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 15.5px;
+      text-align: right;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .money-input-wrap span {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--tx2);
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+
+    select, input[type=date], input[type=text], input[type=tel], textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 12px;
+      border: 1.5px solid var(--line);
+      background: var(--bg);
+      color: var(--tx);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--blue);
+      outline: none;
+    }
+
+    .res {
+      background: var(--bg2);
+      border: 1.5px solid var(--line);
+      border-radius: 18px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      gap: 8px;
+    }
+
+    .res .big {
+      font-size: clamp(30px, 4vw, 40px);
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1.15;
+    }
+
+    .formula-box {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--blue-soft);
+      color: var(--tx);
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    /* Lịch trả nợ chi tiết & Nút tiện ích */
+    .sched-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .sched-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    details.lsch {
+      margin-top: 14px;
+    }
+
+    details.lsch summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--blue);
+      padding: 12px 18px;
+      font-size: 15.5px;
+      background: var(--glass);
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    details.lsch summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .lsch th, #lrows td {
+      padding: 11px 14px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    /* ==========================================================================
+       10. DÒNG THỜI GIAN LỊCH SỬ (TIMELINE)
+       ========================================================================== */
+    .tl {
+      max-width: 740px;
+      margin: 0 auto;
+      border-left: 2.5px solid var(--blue);
+      padding-left: 28px;
+    }
+
+    .tl div {
+      position: relative;
+      margin-bottom: 28px;
+      background: var(--glass);
+      border: 1.5px solid var(--line);
+      border-radius: 18px;
+      padding: 20px 24px;
+    }
+
+    .tl div::before {
+      content: "";
+      position: absolute;
+      left: -37px;
+      top: 24px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 6px var(--blue-soft);
+    }
+
+    .tl b {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .tl h3 {
+      font-size: 19px;
+      font-weight: 800;
+      margin: 4px 0 6px;
+    }
+
+    .tl p {
+      color: var(--tx2);
+      font-size: 15.5px;
+    }
+
+    /* ==========================================================================
+       11. CÂU HỎI THƯỜNG GẶP (FAQ ACCORDION)
+       ========================================================================== */
+    .faq-list {
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    details.faq-item {
+      background: var(--glass);
+      border: 1.5px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 22px;
+      transition: border-color 0.2s;
+    }
+
+    details.faq-item[open] {
+      border-color: var(--blue);
+    }
+
+    details.faq-item summary {
+      font-weight: 800;
+      font-size: 17px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    details.faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.faq-item summary::after {
+      content: "+";
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+
+    details.faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    details.faq-item p {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      color: var(--tx2);
+      font-size: 15.5px;
+      line-height: 1.65;
+    }
+
+    /* ==========================================================================
+       12. BIỂU MẪU ĐĂNG KÝ TƯ VẤN & LIÊN HỆ
+       ========================================================================== */
+    .contact-grid {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      align-items: start;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-err {
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .form-err.show {
+      display: block;
+    }
+
+    .info-box {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+    }
+
+    .info-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .map-card {
+      margin-top: 12px;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--bg2);
+      border: 1.5px solid var(--line);
+    }
+
+    /* Hộp thông báo nổi (Toast Notification) */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 60;
+      background: var(--card);
+      color: var(--tx);
+      border: 2px solid var(--green);
+      border-radius: 16px;
+      padding: 14px 20px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+      font-weight: 700;
+      font-size: 14.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(130%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      max-width: 90vw;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    footer {
+      padding: 36px 0;
+      background: var(--sec);
+      border-top: 1.5px solid var(--line);
+      color: var(--tx2);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       13. RESPONSIVE & IN ẤN (PRINT STYLES)
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .chip { display: none; }
+    }
+
+    @media (max-width: 820px) {
+      nav ul.nav-links { display: none; }
+      #menuBtn { display: inline-flex; }
+      .hero { padding: 68px 0 64px; }
+      section { padding: 60px 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .chip, section.band { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    @media print {
+      .scene, nav, .side, .hero, #gioithieu, .band, #laisuat, #lichsu, #dauan, #faq, #lienhe, footer, .sched-actions, .calc {
+        display: none !important;
+      }
+      body, section {
+        background: #fff !important;
+        color: #000 !important;
+        padding: 0 !important;
+      }
+      details.lsch {
+        display: block !important;
+      }
+      .tbl {
+        border: 1px solid #999 !important;
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       NỀN PHONG CẢNH SVG ĐỘNG (LÀNG QUÊ XANH & ĐÔ THỊ PHÍA XA)
+       ======================================================================== -->
+  <div class="scene" aria-hidden="true">
+    <svg id="scn" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="st1"/>
+          <stop offset="1" class="st2"/>
+        </linearGradient>
+        <pattern id="win" width="14" height="18" patternUnits="userSpaceOnUse">
+          <rect x="4" y="5" width="5" height="8" style="fill:var(--win)" opacity="0.88"/>
+        </pattern>
+        <radialGradient id="glow">
+          <stop offset="0" stop-color="#fff3b0" stop-opacity="0.95"/>
+          <stop offset="1" stop-color="#fff3b0" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#sk)"/>
+      <!-- Các ngôi sao xuất hiện khi bật chế độ ban đêm -->
+      <g fill="#ffffff" style="opacity:var(--star)">
+        <circle cx="180" cy="95" r="1.8"/><circle cx="340" cy="65" r="2.2"/><circle cx="520" cy="120" r="1.5"/>
+        <circle cx="710" cy="80" r="2"/><circle cx="880" cy="110" r="1.6"/><circle cx="1060" cy="70" r="2.1"/>
+        <circle cx="1420" cy="90" r="1.8"/><circle cx="1510" cy="150" r="1.5"/><circle cx="240" cy="190" r="1.4"/>
+      </g>
+      <circle cx="1250" cy="170" r="160" fill="url(#glow)" style="opacity:var(--glw)"/>
+      <circle cx="1250" cy="170" r="52" style="fill:var(--sun)"/>
+      <g fill="#fff" style="opacity:var(--cl)">
+        <ellipse cx="300" cy="150" rx="110" ry="26"/>
+        <ellipse cx="380" cy="130" rx="70" ry="24"/>
+        <ellipse cx="900" cy="230" rx="130" ry="28"/>
+        <ellipse cx="1450" cy="320" rx="90" ry="20"/>
+      </g>
+      <path d="M0 520 C220 450 420 520 640 480 S1050 440 1280 490 S1520 470 1600 500 L1600 900 L0 900Z" style="fill:var(--hill)"/>
+      <g id="gen"></g>
+    </svg>
+  </div>
+
+  <!-- ========================================================================
+       MENU NHANH BÊN CẠNH CHO MÀN HÌNH LỚN
+       ======================================================================== -->
+  <aside class="side" aria-label="Điều hướng nhanh">
+    <a href="#top" data-s="top"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg><span>Trang chủ</span></a>
+    <a href="#gioithieu" data-s="gioithieu"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg><span>Giới thiệu</span></a>
+    <a href="#laisuat" data-s="laisuat"><svg viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg><span>Lãi suất tiền gửi</span></a>
+    <a href="#vay" data-s="vay"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg><span>Cho vay vốn</span></a>
+    <a href="#lichsu" data-s="lichsu"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Lịch sử 30 năm</span></a>
+    <a href="#dauan" data-s="dauan"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.5 6 .8-4.4 4.2 1.1 6L12 16.6 6.7 19.5l1.1-6L3.4 9.3l6-.8z"/></svg><span>Dấu ấn &amp; khen thưởng</span></a>
+    <a href="#faq" data-s="faq"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-2.5 2-2.5 3.5M12 16h.01"/></svg><span>Hỏi đáp (FAQ)</span></a>
+    <a href="#lienhe" data-s="lienhe"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg><span>Liên hệ &amp; Tư vấn</span></a>
+  </aside>
+
+  <!-- ========================================================================
+       THANH ĐIỀU HƯỚNG CHÍNH (HEADER NAVBAR)
+       ======================================================================== -->
+  <nav>
+    <div class="wrap">
+      <a class="logo" href="#top"><i>ĐPY</i><span>QTDND Đông Phương Yên</span></a>
+      <ul class="nav-links">
+        <li><a href="#gioithieu">Giới thiệu</a></li>
+        <li><a href="#laisuat">Lãi suất tiền gửi</a></li>
+        <li><a href="#vay">Cho vay</a></li>
+        <li><a href="#lichsu">Lịch sử</a></li>
+        <li><a href="#dauan">Dấu ấn</a></li>
+        <li><a href="#faq">Hỏi đáp</a></li>
+        <li><a href="#lienhe">Liên hệ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="Chuyển đổi giao diện Sáng / Tối" title="Chuyển chế độ Sáng / Tối">
+          <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <a class="btn sm" href="#lienhe">Tư vấn ngay</a>
+        <button class="icon-btn" id="menuBtn" type="button" aria-label="Mở menu điều hướng" aria-expanded="false">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Menu di động -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="#gioithieu">Giới thiệu chung</a>
+      <a href="#laisuat">Lãi suất tiền gửi &amp; Công cụ tính</a>
+      <a href="#vay">Gói cho vay &amp; Lịch trả nợ</a>
+      <a href="#lichsu">Lịch sử 30 năm phát triển</a>
+      <a href="#dauan">Dấu ấn &amp; Khen thưởng</a>
+      <a href="#faq">Câu hỏi thường gặp (FAQ)</a>
+      <a href="#lienhe">Đăng ký tư vấn &amp; Liên hệ</a>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       PHẦN HERO (BANNER GIỚI THIỆU)
+       ======================================================================== -->
+  <header class="hero" id="top">
+    <div class="chip c1"><b>1.741 thành viên</b>Gắn kết tại 31/10/2026</div>
+    <div class="chip c2"><b>172,7 tỷ đồng</b>Tổng nguồn vốn 31/10/2026</div>
+    <div class="wrap">
+      <div class="hero-badge">Thành lập từ 15/03/1994 • Địa bàn xã Phú Nghĩa, TP Hà Nội</div>
+      <p class="org">QUỸ TÍN DỤNG NHÂN DÂN<br>ĐÔNG PHƯƠNG YÊN</p>
+      <h1>HỢP TÁC - CÙNG PHÁT TRIỂN</h1>
+      <p class="desc">Điểm tựa tài chính an toàn, minh bạch và tận tâm dành cho thành viên cùng nhân dân trên địa bàn xã Phú Nghĩa (Đông Phương Yên, Đông Sơn, Trung Hòa).</p>
+      <div class="row">
+        <a class="btn" href="#laisuat">Tính lãi tiết kiệm</a>
+        <a class="btn outline" href="#vay">Tính khoản vay &amp; Lịch trả nợ</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       1. GIỚI THIỆU & CHỈ TIÊU HOẠT ĐỘNG
+       ======================================================================== -->
+  <section id="gioithieu">
+    <div class="wrap">
+      <h2>PHÁT TRIỂN BỀN VỮNG - HƯỚNG TỚI TƯƠNG LAI</h2>
+      <p class="sub">Thành lập ngày 15/3/1994, Quỹ phục vụ thành viên và nhân dân trên địa bàn xã Phú Nghĩa (gồm 03 xã Đông Phương Yên, Đông Sơn, Trung Hòa cũ).</p>
+      
+      <div class="grid">
+        <div class="card">
+          <h3>Khởi đầu thí điểm</h3>
+          <p>Theo Quyết định 390/QĐ-TTg ngày 27/7/1993 của Chính phủ, Đông Phương Yên là 1 trong 12 quỹ thí điểm của tỉnh Hà Tây khi đó. Quỹ khai trương với 63 thành viên.</p>
+        </div>
+        <div class="card">
+          <h3>An toàn, vững vàng</h3>
+          <p>Hoạt động dưới sự quản lý của Ngân hàng Nhà nước Chi nhánh Khu vực I. Vốn điều lệ 5,39 tỷ đồng, tỷ lệ vốn an toàn tối thiểu 18,89% theo đúng quy định (tại 31/10/2026).</p>
+        </div>
+        <div class="card">
+          <h3>Vì nông nghiệp, nông thôn</h3>
+          <p>Ưu tiên vốn cho sản xuất nông nghiệp và kinh doanh, góp phần xây dựng nông thôn mới, giảm nghèo và đẩy lùi tín dụng đen.</p>
+        </div>
+      </div>
+
+      <h3 style="text-align:center;margin:48px 0 18px;font-size:24px;font-weight:800">Quỹ qua những con số</h3>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr>
+              <th>Chỉ tiêu hoạt động</th>
+              <th>31/12/1994</th>
+              <th>31/12/2024</th>
+              <th>31/10/2026</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tổng nguồn vốn</td>
+              <td>232 triệu đồng</td>
+              <td>163.965 triệu đồng</td>
+              <td class="r">172.707 triệu đồng</td>
+            </tr>
+            <tr>
+              <td>Số thành viên</td>
+              <td>224</td>
+              <td>1.916</td>
+              <td class="r">1.741</td>
+            </tr>
+            <tr>
+              <td>Vốn huy động</td>
+              <td>87 triệu đồng</td>
+              <td>150.635 triệu đồng</td>
+              <td class="r">158.096 triệu đồng</td>
+            </tr>
+            <tr>
+              <td>Dư nợ cho vay</td>
+              <td>230 triệu đồng</td>
+              <td>95.550 triệu đồng</td>
+              <td class="r">91.178 triệu đồng</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Nguồn: Diễn văn kỷ niệm 30 năm, báo cáo năm 2024 và báo cáo kết quả thực hiện nhiệm vụ năm 2026 (số liệu đến 31/10/2026).</p>
+    </div>
+  </section>
+
+  <!-- DẢI THỐNG KÊ NỔI BẬT -->
+  <section class="band">
+    <div class="wrap">
+      <div class="stats">
+        <div><b>30+</b><span>năm hoạt động (từ 1994)</span></div>
+        <div><b>1.741</b><span>thành viên</span></div>
+        <div><b>172,7 tỷ</b><span>tổng nguồn vốn</span></div>
+        <div><b>158,1 tỷ</b><span>vốn huy động</span></div>
+      </div>
+      <p class="note">Số liệu tại 31/10/2026, theo báo cáo kết quả thực hiện nhiệm vụ năm 2026.</p>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       2. LÃI SUẤT TIỀN GỬI & CÔNG CỤ TÍNH LÃI TIẾT KIỆM
+       ======================================================================== -->
+  <section id="laisuat">
+    <div class="wrap">
+      <h2>Lãi suất huy động tiền gửi</h2>
+      <p class="sub">Bảng lãi suất tiền gửi tiết kiệm áp dụng từ ngày 20/10/2026.</p>
+      
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr>
+              <th>Kỳ hạn gửi</th>
+              <th>Thành viên gửi tiền (%/năm)</th>
+              <th>Khách hàng gửi tiền (%/năm)</th>
+            </tr>
+          </thead>
+          <tbody id="rates"></tbody>
+        </table>
+      </div>
+      <p class="note">Theo thông báo của Hội đồng quản trị QTDND Đông Phương Yên. Lãi suất có thể thay đổi theo từng thời kỳ, vui lòng liên hệ Quỹ để biết mức hiện hành.</p>
+
+      <!-- Công cụ tính lãi tiết kiệm (hỗ trợ nhập số tiền trực tiếp + thanh trượt) -->
+      <div class="calc">
+        <div>
+          <h3 style="font-size:21px;font-weight:800">Công cụ tính tiền lãi dự kiến</h3>
+          <div class="calc-field">
+            <div class="calc-head">
+              <label for="amtNum">Số tiền gửi (triệu đồng)</label>
+              <div class="money-input-wrap">
+                <input type="number" id="amtNum" min="1" max="50000" step="1" value="200" aria-label="Nhập số tiền gửi triệu đồng">
+                <span>triệu đ</span>
+              </div>
+            </div>
+            <input type="range" id="amt" min="10" max="2000" step="10" value="200" aria-label="Thanh trượt số tiền gửi">
+            <div style="text-align:right;font-size:13.5px;font-weight:700;color:var(--tx2);margin-top:4px" id="vA">200.000.000 đ</div>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-head"><label for="who">Đối tượng gửi tiền</label></div>
+            <select id="who">
+              <option value="tv">Thành viên Quỹ</option>
+              <option value="kh">Khách hàng</option>
+            </select>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-head"><label for="term">Kỳ hạn gửi</label></div>
+            <select id="term"></select>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-head"><label for="dt">Ngày gửi tiền</label></div>
+            <input type="date" id="dt" aria-label="Ngày gửi tiền">
+          </div>
+        </div>
+
+        <div class="res">
+          <small style="font-weight:700;color:var(--tx2)">Tiền lãi dự kiến nhận được (lãi cuối kỳ)</small>
+          <div class="big" id="oI">0 đ</div>
+          <small id="oT" style="font-weight:600;color:var(--tx)"></small>
+          <div class="formula-box">
+            Công thức: Tiền lãi = Số tiền gửi × Lãi suất/năm × Số ngày thực tế ÷ 365
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. CÁC GÓI CHO VAY, LÃI SUẤT & LỊCH TRẢ NỢ CHI TIẾT
+       ======================================================================== -->
+  <section class="alt" id="vay">
+    <div class="wrap">
+      <h2>Các gói cho vay</h2>
+      <p class="sub">Ưu tiên vốn cho sản xuất hàng thủ công, chăn nuôi, xuất khẩu lao động, kinh doanh dịch vụ và sản xuất nông nghiệp trên địa bàn xã Phú Nghĩa.</p>
+      
+      <div class="grid">
+        <div class="card">
+          <h3>Vay sản xuất nông nghiệp, hàng thủ công</h3>
+          <p>Ưu tiên đầu tư vốn cho trồng trọt, chăn nuôi và sản xuất nông nghiệp, gắn với xây dựng nông thôn mới.</p>
+        </div>
+        <div class="card">
+          <h3>Vay kinh doanh, dịch vụ</h3>
+          <p>Bổ sung vốn kinh doanh cho hộ gia đình và cá nhân, gồm chăn nuôi xây dựng trang trại và kinh doanh vận tải mua xe ô tô. Lãi suất hợp lý, thủ tục đơn giản.</p>
+        </div>
+        <div class="card">
+          <h3>Vay phục vụ đời sống</h3>
+          <p>Dành cho giáo viên, cán bộ công chức trên địa bàn xã Phú Nghĩa.</p>
+        </div>
+        <div class="card">
+          <h3>Vay xuất khẩu lao động, du học</h3>
+          <p>Hỗ trợ người đi xuất khẩu lao động và thành viên có con em đi du học, tạo điều kiện tối đa về thủ tục.</p>
+        </div>
+      </div>
+
+      <h3 style="text-align:center;margin:46px 0 18px;font-size:24px;font-weight:800">Lãi suất cho vay</h3>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr>
+              <th>Hình thức vay</th>
+              <th>Lãi suất (%/năm)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Vay có giao dịch bảo đảm</td>
+              <td class="r">11,68%</td>
+            </tr>
+            <tr>
+              <td>Vay không có giao dịch bảo đảm</td>
+              <td class="r">12,00%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Công cụ tính khoản vay & Lịch trả nợ -->
+      <div class="calc">
+        <div>
+          <h3 style="font-size:21px;font-weight:800">Công cụ tính khoản vay dự kiến</h3>
+          <div class="calc-field">
+            <div class="calc-head">
+              <label for="lamtNum">Số tiền vay (triệu đồng)</label>
+              <div class="money-input-wrap">
+                <input type="number" id="lamtNum" min="1" max="20000" step="1" value="200" aria-label="Nhập số tiền vay triệu đồng">
+                <span>triệu đ</span>
+              </div>
+            </div>
+            <input type="range" id="lamt" min="10" max="1000" step="10" value="200" aria-label="Thanh trượt số tiền vay">
+            <div style="text-align:right;font-size:13.5px;font-weight:700;color:var(--tx2);margin-top:4px" id="lA">200.000.000 đ</div>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-head">
+              <label for="lterm">Thời hạn vay</label>
+              <b id="lT" style="color:var(--blue)">36 tháng</b>
+            </div>
+            <input type="range" id="lterm" min="3" max="120" step="3" value="36" aria-label="Thời hạn vay">
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-head"><label for="lkind">Hình thức vay</label></div>
+            <select id="lkind">
+              <option value="11.68">Có giao dịch bảo đảm (11,68%/năm)</option>
+              <option value="12">Không có giao dịch bảo đảm (12,00%/năm)</option>
+            </select>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-head"><label for="lmode">Phương thức trả nợ</label></div>
+            <select id="lmode">
+              <option value="g">Gốc trả đều hàng tháng, lãi tính trên dư nợ</option>
+              <option value="c">Trả lãi hàng tháng, gốc trả cuối kỳ</option>
+            </select>
+          </div>
+
+          <div class="calc-field">
+            <div class="calc-head"><label for="ldt">Ngày giải ngân</label></div>
+            <input type="date" id="ldt" aria-label="Ngày giải ngân">
+          </div>
+        </div>
+
+        <div class="res">
+          <small style="font-weight:700;color:var(--tx2)">Số tiền phải trả kỳ đầu tiên</small>
+          <div class="big" id="lF">0 đ</div>
+          <small id="lS" style="font-weight:700;color:var(--tx)"></small>
+          <small id="lS2" style="font-weight:600;color:var(--tx2)"></small>
+          <div class="formula-box">
+            Công thức: Tiền lãi kỳ = Dư nợ × Lãi suất/năm × Số ngày thực tế ÷ 365
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh tiện ích sao chép & in lịch trả nợ -->
+      <div class="sched-bar">
+        <span style="font-weight:700;font-size:15px">Bảng tính chi tiết từng kỳ trả nợ:</span>
+        <div class="sched-actions">
+          <button type="button" class="btn sm outline" id="copySchedBtn">Sao chép lịch trả nợ</button>
+          <button type="button" class="btn sm outline" id="printSchedBtn">In / Xuất PDF</button>
+        </div>
+      </div>
+
+      <details class="lsch" open>
+        <summary>Xem / Thu gọn bảng lịch trả nợ chi tiết theo từng tháng</summary>
+        <div class="tbl" style="margin-top:12px">
+          <table>
+            <thead>
+              <tr>
+                <th>Kỳ</th>
+                <th>Ngày trả</th>
+                <th>Gốc (đ)</th>
+                <th>Lãi (đ)</th>
+                <th>Tổng phải trả (đ)</th>
+                <th>Dư nợ còn lại (đ)</th>
+              </tr>
+            </thead>
+            <tbody id="lrows"></tbody>
+          </table>
+        </div>
+      </details>
+
+      <p class="note">Kết quả chỉ mang tính tham khảo. Mức vay, lãi suất và lịch trả nợ thực tế theo hồ sơ và thỏa thuận tại Quỹ.</p>
+      <p class="note">Lãi suất cho vay áp dụng từ ngày 20/10/2026. Vay thế chấp sổ tiết kiệm và các trường hợp khác, vui lòng liên hệ Quỹ để được tư vấn.</p>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. LỊCH SỬ 30 NĂM ĐỒNG HÀNH
+       ======================================================================== -->
+  <section id="lichsu">
+    <div class="wrap">
+      <h2>30 năm đồng hành</h2>
+      <p class="sub">Một chặng đường xây dựng niềm tin cùng cộng đồng.</p>
+      <div class="tl">
+        <div>
+          <b>27/7/1993</b>
+          <h3>Chính phủ cho phép thành lập</h3>
+          <p>Quyết định 390/QĐ-TTg thành lập Quỹ tín dụng nhân dân theo mô hình mới. Đông Phương Yên được chọn thí điểm, là 1 trong 12 quỹ của tỉnh Hà Tây.</p>
+        </div>
+        <div>
+          <b>15/3/1994</b>
+          <h3>Khai trương hoạt động</h3>
+          <p>Quỹ bắt đầu với 63 thành viên. Cuối năm 1994 có 224 thành viên, tổng nguồn vốn 232 triệu đồng.</p>
+        </div>
+        <div>
+          <b>1996</b>
+          <h3>Vượt qua giai đoạn khó khăn</h3>
+          <p>Huy động vốn gặp nhiều trở ngại. Nhờ cấp ủy, chính quyền, Ngân hàng Nhà nước và sự nỗ lực của cán bộ, Quỹ đứng vững và tăng trưởng 18 - 20% mỗi năm.</p>
+        </div>
+        <div>
+          <b>13/11/2007</b>
+          <h3>Mở Phòng giao dịch Phố Gốt</h3>
+          <p>Mở rộng điểm phục vụ để thu hút tiền gửi và đáp ứng vốn vay cho nhân dân trong khu vực.</p>
+        </div>
+        <div>
+          <b>26/8/2013</b>
+          <h3>Thành lập chi bộ</h3>
+          <p>Đảng ủy xã cho phép thành lập chi bộ để lãnh đạo trực tiếp hoạt động của Quỹ.</p>
+        </div>
+        <div>
+          <b>15/8/2018</b>
+          <h3>Mở rộng sang xã Trung Hòa</h3>
+          <p>Được Ngân hàng Nhà nước chấp thuận, Quỹ phục vụ thành viên 03 xã Đông Phương Yên, Đông Sơn và Trung Hòa.</p>
+        </div>
+        <div>
+          <b>29/7/2022</b>
+          <h3>Chuyển tiền điện tử</h3>
+          <p>Được phép chuyển tiền điện tử qua hệ thống của ngân hàng, đến năm 2023 gần 400 lượt giao dịch với tổng giá trị gần 100 tỷ đồng.</p>
+        </div>
+        <div>
+          <b>10/3/2024</b>
+          <h3>Kỷ niệm 30 năm thành lập</h3>
+          <p>Tổ chức lễ kỷ niệm 30 năm ngày thành lập Quỹ (15/3/1994 – 15/3/2024), khẳng định vai trò đối với phát triển kinh tế - xã hội địa phương.</p>
+        </div>
+        <div>
+          <b>Năm 2024</b>
+          <h3>Tiếp tục tăng trưởng</h3>
+          <p>Kết nạp thêm 77 thành viên, nâng tổng số lên 1.916. Chuyển tiền điện tử đạt 700 lượt giao dịch, 40.460 triệu đồng. Tổng nguồn vốn 163.965 triệu đồng, không có nợ quá hạn.</p>
+        </div>
+        <div>
+          <b>Năm 2026</b>
+          <h3>Hoạt động trên địa bàn xã Phú Nghĩa</h3>
+          <p>Tổ chức Đại hội thường niên ngày 16/4/2026. Đến 31/10/2026, tổng nguồn vốn đạt 172.707 triệu đồng, vốn huy động 158.096 triệu đồng, dư nợ cho vay 91.178 triệu đồng.</p>
+        </div>
+      </div>
+      <p class="note">Nguồn: Diễn văn kỷ niệm 30 năm ngày thành lập Quỹ (15/3/1994 – 15/3/2024) và báo cáo hoạt động năm 2026.</p>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. DẤU ẤN & KHEN THƯỞNG
+       ======================================================================== -->
+  <section class="alt" id="dauan">
+    <div class="wrap">
+      <h2>Cùng địa phương đổi thay</h2>
+      <p class="sub">Vốn vay của Quỹ góp phần cải thiện đời sống thành viên và nhân dân.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="big">38,98 lần</div>
+          <h3>Thu nhập bình quân đầu người</h3>
+          <p>Từ 1,8 triệu đồng/người/năm (1994) lên 70,18 triệu đồng (2023).</p>
+        </div>
+        <div class="card">
+          <div class="big">45,6% → 0,2%</div>
+          <h3>Tỷ lệ hộ nghèo của xã</h3>
+          <p>Năm 1994 là 45,6%. Năm 2023 chỉ còn 6 hộ nghèo, chiếm 0,2%.</p>
+        </div>
+        <div class="card">
+          <div class="big">35,5 triệu đồng</div>
+          <h3>Ủng hộ cộng đồng năm 2026</h3>
+          <p>Ủng hộ quỹ vì người nghèo, đồng bào lũ lụt và các chương trình do hội đoàn thể tổ chức.</p>
+        </div>
+        <div class="card">
+          <div class="big">100 triệu đồng</div>
+          <h3>Miễn giảm lãi suất 2020 - 2022</h3>
+          <p>Hỗ trợ thành viên đang vay vượt qua dịch tả lợn châu Phi, cúm gia cầm và Covid-19. Quỹ còn hỗ trợ vật tư y tế trên 100 triệu đồng.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:22px">
+        <h3>Thành tích &amp; Khen thưởng tiêu biểu</h3>
+        <ul style="color:var(--tx2);font-size:15.5px;padding-left:22px;line-height:1.95;margin-top:8px">
+          <li>Bằng khen của Thống đốc Ngân hàng Nhà nước: 2008, 2014</li>
+          <li>Bằng khen của Liên minh HTX Việt Nam: 2008, 2012, 2014, 2016, 2017, 2024</li>
+          <li>Bằng khen của UBND tỉnh Hà Tây: 2003, 2007</li>
+          <li>Bằng khen của UBND TP Hà Nội: 2012, 2023</li>
+          <li>Tập thể lao động xuất sắc của NHNN chi nhánh TP Hà Nội: 2012</li>
+          <li>Đảng ủy, UBND xã khen thưởng tập thể hoàn thành tốt nhiệm vụ năm 2024</li>
+          <li>8 cán bộ, nhân viên được tặng kỷ niệm chương Vì sự nghiệp Ngân hàng</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. CÂU HỎI THƯỜNG GẶP (FAQ)
+       ======================================================================== -->
+  <section id="faq">
+    <div class="wrap">
+      <h2>Câu hỏi thường gặp</h2>
+      <p class="sub">Giải đáp nhanh về thủ tục gửi tiết kiệm, kết nạp thành viên và hồ sơ vay vốn tại QTDND Đông Phương Yên.</p>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>1. Thủ tục mở sổ tiết kiệm tại QTDND Đông Phương Yên cần những gì?</summary>
+          <p>Quý khách chỉ cần mang theo Căn cước công dân (CCCD) gắn chip còn hiệu lực đến Trụ sở chính (Thôn Phương Hài) hoặc Phòng giao dịch Phố Gốt (Thôn Đông Sơn) trong giờ làm việc. Cán bộ Quỹ sẽ hướng dẫn lập phiếu gửi tiền và cấp sổ tiết kiệm ngay trong vài phút. Tiền gửi được bảo hiểm tiền gửi theo quy định của Nhà nước.</p>
+        </details>
+        <details class="faq-item">
+          <summary>2. Thành viên và Khách hàng gửi tiền có mức lãi suất khác nhau như thế nào?</summary>
+          <p>Theo biểu lãi suất áp dụng từ ngày 20/10/2026, Thành viên của Quỹ được hưởng mức lãi suất huy động có kỳ hạn ưu đãi cao hơn từ 0,2% đến 0,3%/năm so với khách hàng thông thường (ví dụ kỳ hạn 12 tháng: Thành viên hưởng 6,60%/năm, Khách hàng hưởng 6,30%/năm; kỳ hạn 13–18 tháng: Thành viên hưởng 6,80%/năm).</p>
+        </details>
+        <details class="faq-item">
+          <summary>3. Điều kiện để trở thành Thành viên của Quỹ tín dụng nhân dân Đông Phương Yên là gì?</summary>
+          <p>Công dân Việt Nam từ đủ 18 tuổi trở lên, có năng lực hành vi dân sự đầy đủ, có hộ khẩu thường trú hoặc tạm trú hợp pháp và hoạt động sản xuất kinh doanh trên địa bàn xã Phú Nghĩa (bao gồm 03 xã Đông Phương Yên, Đông Sơn, Trung Hòa cũ), tán thành Điều lệ Quỹ và góp vốn xác lập tư cách thành viên theo quy định của Đại hội thành viên.</p>
+        </details>
+        <details class="faq-item">
+          <summary>4. Hồ sơ vay vốn tại Quỹ bao gồm những giấy tờ gì và thời gian giải ngân bao lâu?</summary>
+          <p>Hồ sơ cơ bản gồm: Giấy đề nghị vay vốn (theo mẫu của Quỹ), CCCD của người vay và người đồng trách nhiệm, phương án sử dụng vốn vay (sản xuất nông nghiệp, kinh doanh, tiêu dùng, xuất khẩu lao động...) và giấy tờ chứng nhận quyền sử dụng đất/tài sản bảo đảm (đối với hình thức vay có giao dịch bảo đảm). Thời gian thẩm định và giải ngân nhanh gọn trong vòng 1 – 3 ngày làm việc sau khi đủ hồ sơ hợp lệ.</p>
+        </details>
+        <details class="faq-item">
+          <summary>5. Tôi có sổ tiết kiệm tại Quỹ, khi cần tiền gấp có thể vay cầm cố sổ không?</summary>
+          <p>Có. Quý khách hoàn toàn có thể vay cầm cố bằng chính Sổ tiết kiệm do QTDND Đông Phương Yên phát hành để giải quyết nhu cầu tài chính đột xuất mà vẫn bảo toàn được phần lãi suất tiết kiệm đã tích lũy. Vui lòng liên hệ trực tiếp quầy giao dịch để được tư vấn mức lãi suất ưu đãi nhất.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. ĐĂNG KÝ TƯ VẤN TRỰC TUYẾN & THÔNG TIN LIÊN HỆ
+       ======================================================================== -->
+  <section class="alt" id="lienhe">
+    <div class="wrap">
+      <h2>Liên hệ &amp; Đăng ký tư vấn</h2>
+      <p class="sub">Để lại thông tin bên dưới hoặc đến trực tiếp trụ sở giao dịch của Quỹ để được hỗ trợ tận tình.</p>
+
+      <div class="contact-grid">
+        <!-- Biểu mẫu đăng ký tư vấn -->
+        <div class="card">
+          <h3 style="margin-bottom:14px">Đăng ký tư vấn gửi tiền / vay vốn</h3>
+          <form id="consultForm" novalidate>
+            <div class="form-group">
+              <label for="fName">Họ và tên <span style="color:var(--red)">*</span></label>
+              <input type="text" id="fName" placeholder="Ví dụ: Nguyễn Văn An" required>
+              <div class="form-err" id="errName">Vui lòng nhập họ và tên của bạn.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="fPhone">Số điện thoại liên hệ <span style="color:var(--red)">*</span></label>
+              <input type="tel" id="fPhone" placeholder="Ví dụ: 0912 345 678" required>
+              <div class="form-err" id="errPhone">Vui lòng nhập số điện thoại hợp lệ (10 số).</div>
+            </div>
+
+            <div class="form-group">
+              <label for="fService">Nhu cầu quan tâm</label>
+              <select id="fService">
+                <option value="Gửi tiền tiết kiệm">Gửi tiền tiết kiệm hưởng lãi suất cao</option>
+                <option value="Vay vốn sản xuất / kinh doanh">Vay vốn sản xuất nông nghiệp, kinh doanh</option>
+                <option value="Vay tiêu dùng / XKLĐ">Vay phục vụ đời sống / Xuất khẩu lao động</option>
+                <option value="Kết nạp thành viên">Đăng ký kết nạp thành viên Quỹ</option>
+                <option value="Tư vấn khác">Tư vấn dịch vụ khác</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="fNote">Nội dung ghi chú (không bắt buộc)</label>
+              <textarea id="fNote" rows="3" placeholder="Ví dụ: Dự kiến gửi 300 triệu kỳ hạn 12 tháng, nhờ cán bộ gọi lại buổi sáng..."></textarea>
+            </div>
+
+            <button type="submit" class="btn" style="width:100%">Gửi yêu cầu tư vấn</button>
+          </form>
+        </div>
+
+        <!-- Thông tin địa chỉ & giờ làm việc -->
+        <div class="card info-box">
+          <h3>Thông tin giao dịch chính thức</h3>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <strong style="display:block;font-size:16px">Địa điểm giao dịch</strong>
+              <p style="margin-top:2px"><b>Trụ sở chính:</b> Thôn Phương Hài, xã Phú Nghĩa, TP Hà Nội</p>
+              <p style="margin-top:4px"><b>Phòng giao dịch Phố Gốt:</b> Thôn Đông Sơn, xã Phú Nghĩa, TP Hà Nội</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <strong style="display:block;font-size:16px">Điện thoại hỗ trợ</strong>
+              <p style="margin-top:2px">Hotline giao dịch: <b>0xxx xxx xxx</b></p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <div>
+              <strong style="display:block;font-size:16px">Giờ làm việc</strong>
+              <p style="margin-top:2px">Thứ Hai đến Thứ Sáu: <b>7:30 – 16:30</b></p>
+              <p style="margin-top:2px">Thứ Bảy: <b>7:15 – 11:00</b> (Chủ nhật nghỉ)</p>
+            </div>
+          </div>
+
+          <div class="map-card">
+            <strong style="display:block;font-size:15px;margin-bottom:6px">Chỉ đường đến trụ sở</strong>
+            <p style="font-size:14px;margin-bottom:12px">Nằm trên trục giao thông thuận tiện của xã Phú Nghĩa (trước đây thuộc huyện Chương Mỹ, TP Hà Nội).</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn sm outline" href="https://maps.google.com/?q=Phu+Nghia+Chuong+My+Ha+Noi" target="_blank" rel="noopener noreferrer">Mở Google Maps</a>
+              <button type="button" class="btn sm outline" id="copyAddrBtn">Sao chép địa chỉ</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      © 2026 Quỹ tín dụng nhân dân Đông Phương Yên. Trụ sở: Thôn Phương Hài, xã Phú Nghĩa, TP Hà Nội. Bảo lưu mọi quyền.
+    </div>
+  </footer>
+
+  <!-- Hộp thông báo nổi (Toast) -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span style="color:var(--green);font-size:18px">✓</span>
+    <span id="toastMsg">Đã thực hiện thành công!</span>
+  </div>
+
+  <!-- ========================================================================
+       MÃ NGUỒN JAVASCRIPT XỬ LÝ TƯƠNG TÁC & TÍNH TOÁN TÀI CHÍNH
+       ======================================================================== -->
+  <script>
+    (function () {
+      const $ = id => document.getElementById(id);
+
+      /* ----------------------------------------------------------------------
+         1. VẼ PHONG CẢNH SVG ĐỘNG (ĐÔ THỊ PHÍA XA & LÀNG QUÊ PHÍA GẦN)
+         ---------------------------------------------------------------------- */
+      const gen = $('gen');
+      if (gen) {
+        let sd = 11, h = '', x, w, t, i;
+        const r = () => { sd = (sd * 16807) % 2147483647; return sd / 2147483647; };
+        const bld = (bx, bw, ht, base, c, win) => {
+          const a = `x="${bx.toFixed(0)}" y="${(base - ht).toFixed(0)}" width="${bw.toFixed(0)}" height="${ht.toFixed(0)}"`;
+          h += `<rect ${a} style="fill:var(${c})"/>`;
+          if (win) h += `<rect ${a} fill="url(#win)"/>`;
+        };
+        for (x = 20; x < 980; x += w + 3) {
+          w = 34 + r() * 40;
+          t = Math.max(0.12, 1 - x / 1000);
+          bld(x, w, (80 + r() * 190) * t + 24, 650, '--cb2', 0);
+        }
+        for (x = -10; x < 930; x += w + 5) {
+          w = 42 + r() * 44;
+          t = Math.max(0.1, 1 - x / 940);
+          bld(x, w, (110 + r() * 240) * t + 28, 672, '--cb1', 1);
+        }
+        for (i = 0; i < 5; i++) {
+          const y = 655 + i * 48;
+          h += `<path d="M0 ${y} C400 ${y - 26} 800 ${y + 26} 1600 ${y - 12} L1600 900 L0 900Z" style="fill:var(--f${(i % 3) + 1})"/>`;
+        }
+        h += `<path d="M700 900 C760 820 930 810 890 750 S800 715 830 690" fill="none" style="stroke:var(--road)" stroke-width="26" stroke-linecap="round"/>`;
+        for (x = 960; x < 1580; x += 70 + r() * 50) {
+          const by = 700 + r() * 40;
+          h += `<rect x="${x.toFixed(0)}" y="${(by - 26).toFixed(0)}" width="44" height="26" style="fill:var(--wall)"/>`;
+          h += `<polygon points="${(x - 6).toFixed(0)},${(by - 26).toFixed(0)} ${(x + 22).toFixed(0)},${(by - 48).toFixed(0)} ${(x + 50).toFixed(0)},${(by - 26).toFixed(0)}" style="fill:var(--roof)"/>`;
+        }
+        for (i = 0; i < 30; i++) {
+          x = r() * 1600;
+          const ty = 705 + r() * 165, rr = 9 + (ty - 700) / 12;
+          h += `<rect x="${(x - 2).toFixed(0)}" y="${ty.toFixed(0)}" width="4" height="${rr.toFixed(0)}" fill="#6b4a2f"/>`;
+          h += `<circle cx="${x.toFixed(0)}" cy="${ty.toFixed(0)}" r="${rr.toFixed(0)}" style="fill:var(--tree)"/>`;
+        }
+        gen.innerHTML = h;
+      }
+
+      /* ----------------------------------------------------------------------
+         2. HỆ THỐNG THÔNG BÁO NỔI (TOAST) & SAO CHÉP CLIPBOARD AN TOÀN
+         ---------------------------------------------------------------------- */
+      let toastTimer;
+      function showToast(msg) {
+        const el = $('toast');
+        $('toastMsg').textContent = msg;
+        el.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove('show'), 3400);
+      }
+
+      function copyTextSafe(text, successMsg) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          showToast(successMsg);
+        } catch (err) {
+          showToast('Không thể sao chép tự động, vui lòng thử lại.');
+        }
+        document.body.removeChild(ta);
+      }
+
+      /* ----------------------------------------------------------------------
+         3. CHUYỂN ĐỔI CHẾ ĐỘ SÁNG / TỐI THỦ CÔNG & MENU DI ĐỘNG
+         ---------------------------------------------------------------------- */
+      const root = document.documentElement;
+      const themeBtn = $('themeBtn');
+      const themeIcon = $('themeIcon');
+
+      function updateThemeIcon(isDark) {
+        themeIcon.innerHTML = isDark
+          ? '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'
+          : '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+      }
+
+      const savedTheme = localStorage.getItem('qtdnd-theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initialDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+      if (savedTheme) root.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(initialDark);
+
+      themeBtn.addEventListener('click', () => {
+        const currentDark = root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && prefersDark);
+        const nextTheme = currentDark ? 'light' : 'dark';
+        root.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('qtdnd-theme', nextTheme);
+        updateThemeIcon(nextTheme === 'dark');
+        showToast(nextTheme === 'dark' ? 'Đã chuyển sang giao diện Ban đêm' : 'Đã chuyển sang giao diện Ban ngày');
+      });
+
+      // Menu Hamburger cho điện thoại
+      const menuBtn = $('menuBtn');
+      const mobileDrawer = $('mobileDrawer');
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileDrawer.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+      mobileDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDrawer.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      /* ----------------------------------------------------------------------
+         4. HIGHLIGHT MENU THEO VỊ TRÍ CUỘN TRANG
+         ---------------------------------------------------------------------- */
+      const sideLinks = [...document.querySelectorAll('.side a')];
+      function updateScrollSpy() {
+        let current = 'top';
+        sideLinks.forEach(a => {
+          const sec = document.getElementById(a.dataset.s);
+          if (sec && sec.getBoundingClientRect().top <= 190) current = a.dataset.s;
+        });
+        sideLinks.forEach(a => a.classList.toggle('on', a.dataset.s === current));
+      }
+      window.addEventListener('scroll', updateScrollSpy, { passive: true });
+      updateScrollSpy();
+
+      /* ----------------------------------------------------------------------
+         5. DỮ LIỆU LÃI SUẤT TIỀN GỬI (ÁP DỤNG TỪ 20/10/2026) & TÍNH LÃI TIẾT KIỆM
+         ---------------------------------------------------------------------- */
+      const D = [
+        ["Gửi không kỳ hạn", 0.2, 0.2, 0],
+        ["Kỳ hạn 1 tháng", 3.5, 3.3, 1],
+        ["Kỳ hạn 2 tháng", 3.5, 3.3, 2],
+        ["Kỳ hạn 3 tháng", 4.5, 4.3, 3],
+        ["Kỳ hạn 4 tháng", 4.5, 4.3, 4],
+        ["Kỳ hạn 5 tháng", 4.5, 4.3, 5],
+        ["Kỳ hạn 6 tháng", 5.5, 5.3, 6],
+        ["Kỳ hạn 7 tháng", 5.5, 5.3, 7],
+        ["Kỳ hạn 8 tháng", 5.5, 5.3, 8],
+        ["Kỳ hạn 9 tháng", 6.0, 5.8, 9],
+        ["Kỳ hạn 10 tháng", 6.0, 5.8, 10],
+        ["Kỳ hạn 11 tháng", 6.0, 5.8, 11],
+        ["Kỳ hạn 12 tháng", 6.6, 6.3, 12],
+        ["Kỳ hạn 13 tháng", 6.8, 6.5, 13],
+        ["Kỳ hạn 15 tháng", 6.8, 6.5, 15],
+        ["Kỳ hạn 18 tháng", 6.8, 6.5, 18]
+      ];
+
+      const f2 = n => n.toFixed(2).replace('.', ',');
+      const fmt = n => Math.round(n).toLocaleString('vi-VN');
+
+      $('rates').innerHTML = D.map(r =>
+        `<tr><td>${r[0]}</td><td class="r">${f2(r[1])}%</td><td class="r">${f2(r[2])}%</td></tr>`
+      ).join('');
+
+      const L = D.filter(r => r[3]);
+      const tm = $('term'), wh = $('who'), dt = $('dt');
+      const amtRange = $('amt'), amtNum = $('amtNum');
+
+      tm.innerHTML = L.map((r, i) =>
+        `<option value="${i}"${r[3] === 12 ? ' selected' : ''}>${r[3]} tháng</option>`
+      ).join('');
+
+      const p2 = n => String(n).padStart(2, '0');
+      const todayStr = (d => `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`)(new Date());
+      dt.value = todayStr;
+
+      function addM(d, m) {
+        const x = new Date(d.getFullYear(), d.getMonth() + m, 1);
+        const lastDay = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate();
+        x.setDate(Math.min(d.getDate(), lastDay));
+        return x;
+      }
+
+      function calcSavings() {
+        const millions = Math.max(1, Number(amtNum.value) || 0);
+        const a = millions * 1e6;
+        const r = L[+tm.value];
+        const rt = wh.value === 'tv' ? r[1] : r[2];
+        const st = dt.value ? new Date(dt.value + 'T00:00:00') : new Date();
+        const en = addM(st, r[3]);
+        const days = Math.round((en - st) / 864e5);
+        const interest = a * (rt / 100) * days / 365;
+
+        $('vA').textContent = fmt(a) + ' đ';
+        $('oI').textContent = fmt(interest) + ' đ';
+        $('oT').textContent = `Lãi suất ${f2(rt)}%/năm • ${days} ngày thực tế (đến ${en.toLocaleDateString('vi-VN')}). Tổng nhận gốc & lãi: ${fmt(a + interest)} đ`;
+      }
+
+      amtRange.addEventListener('input', () => {
+        amtNum.value = amtRange.value;
+        calcSavings();
+      });
+      amtNum.addEventListener('input', () => {
+        const val = Math.min(2000, Math.max(10, Number(amtNum.value) || 10));
+        amtRange.value = val;
+        calcSavings();
+      });
+      [tm, wh, dt].forEach(el => el.addEventListener('change', calcSavings));
+      calcSavings();
+
+      /* ----------------------------------------------------------------------
+         6. CÔNG CỤ TÍNH KHOẢN VAY & BẢNG LỊCH TRẢ NỢ CHI TIẾT
+         ---------------------------------------------------------------------- */
+      const ld = $('ldt');
+      ld.value = todayStr;
+      const lamtRange = $('lamt'), lamtNum = $('lamtNum');
+      let latestScheduleText = '';
+
+      function calcLoan() {
+        const millions = Math.max(1, Number(lamtNum.value) || 0);
+        const P = millions * 1e6;
+        const n = +$('lterm').value;
+        const rt = +$('lkind').value;
+        const md = $('lmode').value;
+        const st = ld.value ? new Date(ld.value + 'T00:00:00') : new Date();
+
+        $('lA').textContent = fmt(P) + ' đ';
+        $('lT').textContent = n + ' tháng';
+
+        let bal = P, prev = st, ti = 0, first = 0, rows = '';
+        const textLines = [
+          `LỊCH TRẢ NỢ DỰ KIẾN - QTDND ĐÔNG PHƯƠNG YÊN`,
+          `Số tiền vay: ${fmt(P)} đ | Thời hạn: ${n} tháng | Lãi suất: ${String(rt).replace('.', ',')}%/năm`,
+          `Kỳ | Ngày trả | Gốc (đ) | Lãi (đ) | Tổng phải trả (đ) | Dư nợ còn lại (đ)`
+        ];
+
+        for (let k = 1; k <= n; k++) {
+          const d = addM(st, k);
+          const days = Math.round((d - prev) / 864e5);
+          const i = bal * (rt / 100) * days / 365;
+          const g = k === n ? bal : (md === 'g' ? Math.round(P / n) : 0);
+          const pay = g + i;
+          ti += i;
+          if (k === 1) first = pay;
+          bal = Math.max(0, bal - g);
+          prev = d;
+
+          const dStr = d.toLocaleDateString('vi-VN');
+          rows += `<tr><td>${k}</td><td>${dStr}</td><td>${fmt(g)}</td><td>${fmt(i)}</td><td>${fmt(pay)}</td><td>${fmt(bal)}</td></tr>`;
+          textLines.push(`${k} | ${dStr} | ${fmt(g)} | ${fmt(i)} | ${fmt(pay)} | ${fmt(bal)}`);
+        }
+
+        latestScheduleText = textLines.join('\n');
+        $('lF').textContent = fmt(first) + ' đ';
+        $('lS').textContent = `Tổng tiền lãi dự kiến: ${fmt(ti)} đ`;
+        $('lS2').textContent = `Tổng gốc và lãi: ${fmt(P + ti)} đ (lãi suất ${String(rt).replace('.', ',')}%/năm)`;
+        $('lrows').innerHTML = rows;
+      }
+
+      lamtRange.addEventListener('input', () => {
+        lamtNum.value = lamtRange.value;
+        calcLoan();
+      });
+      lamtNum.addEventListener('input', () => {
+        const val = Math.min(1000, Math.max(10, Number(lamtNum.value) || 10));
+        lamtRange.value = val;
+        calcLoan();
+      });
+      $('lterm').addEventListener('input', calcLoan);
+      ['lkind', 'lmode', 'ldt'].forEach(id => $(id).addEventListener('change', calcLoan));
+      calcLoan();
+
+      // Nút sao chép & in lịch trả nợ
+      $('copySchedBtn').addEventListener('click', () => {
+        copyTextSafe(latestScheduleText, 'Đã sao chép bảng lịch trả nợ vào bộ nhớ tạm!');
+      });
+      $('printSchedBtn').addEventListener('click', () => {
+        window.print();
+      });
+
+      /* ----------------------------------------------------------------------
+         7. XỬ LÝ BIỂU MẪU ĐĂNG KÝ TƯ VẤN & SAO CHÉP ĐỊA CHỈ
+         ---------------------------------------------------------------------- */
+      $('copyAddrBtn').addEventListener('click', () => {
+        copyTextSafe(
+          'Trụ sở chính: Thôn Phương Hài, xã Phú Nghĩa, TP Hà Nội | PGD Phố Gốt: Thôn Đông Sơn, xã Phú Nghĩa, TP Hà Nội',
+          'Đã sao chép địa chỉ trụ sở QTDND Đông Phương Yên!'
+        );
+      });
+
+      $('consultForm').addEventListener('submit', e => {
+        e.preventDefault();
+        const name = $('fName').value.trim();
+        const phone = $('fPhone').value.replace(/\s+/g, '');
+        const validPhone = /^(0|\+84)[0-9]{9}$/.test(phone);
+
+        $('errName').classList.toggle('show', name.length < 2);
+        $('errPhone').classList.toggle('show', !validPhone);
+
+        if (name.length < 2 || !validPhone) return;
+
+        showToast(`Cảm ơn ${name}! Yêu cầu tư vấn "${$('fService').value}" đã được ghi nhận.`);
+        $('consultForm').reset();
+      });
+    })();
+  </script>
+</body>
+</html>
