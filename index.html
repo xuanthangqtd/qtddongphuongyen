@@ -796,22 +796,47 @@
       outline: none;
     }
 
-    .date-input-group {
+    .vn-date-box {
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 8px;
+      width: 100%;
     }
 
-    .date-vn-badge {
-      flex: none;
-      padding: 10px 13px;
-      border-radius: 12px;
+    .vn-date-box input.vn-date-txt {
+      padding-right: 44px;
+      letter-spacing: 0.02em;
+    }
+
+    .vn-date-picker-btn {
+      position: absolute;
+      right: 6px;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      border: 0;
+      background: transparent;
+      color: var(--tx2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .vn-date-picker-btn:hover {
       background: var(--blue-soft);
-      border: 1.5px solid var(--line);
       color: var(--blue);
-      font-size: 14.5px;
-      font-weight: 800;
-      white-space: nowrap;
+    }
+
+    .vn-date-native {
+      position: absolute;
+      right: 6px;
+      width: 34px;
+      height: 34px;
+      opacity: 0;
+      cursor: pointer;
+      border: 0;
+      padding: 0;
     }
 
     .res {
@@ -1386,11 +1411,14 @@
 
           <div class="calc-field">
             <div class="calc-head">
-              <label for="dt">Ngày gửi tiền (Ngày / Tháng / Năm)</label>
+              <label for="dtTxt">Ngày gửi tiền (Ngày / Tháng / Năm)</label>
             </div>
-            <div class="date-input-group">
-              <input type="date" id="dt" aria-label="Ngày gửi tiền">
-              <span class="date-vn-badge" id="dtVn">--/--/----</span>
+            <div class="vn-date-box">
+              <input type="text" id="dtTxt" class="vn-date-txt" placeholder="dd/mm/yyyy" maxlength="10" inputmode="numeric" aria-label="Ngày gửi tiền định dạng ngày tháng năm">
+              <span class="vn-date-picker-btn" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              </span>
+              <input type="date" id="dt" class="vn-date-native" aria-label="Chọn ngày gửi tiền trên lịch">
             </div>
           </div>
         </div>
@@ -1498,11 +1526,14 @@
 
           <div class="calc-field">
             <div class="calc-head">
-              <label for="ldt">Ngày giải ngân (Ngày / Tháng / Năm)</label>
+              <label for="ldtTxt">Ngày giải ngân (Ngày / Tháng / Năm)</label>
             </div>
-            <div class="date-input-group">
-              <input type="date" id="ldt" aria-label="Ngày giải ngân">
-              <span class="date-vn-badge" id="ldtVn">--/--/----</span>
+            <div class="vn-date-box">
+              <input type="text" id="ldtTxt" class="vn-date-txt" placeholder="dd/mm/yyyy" maxlength="10" inputmode="numeric" aria-label="Ngày giải ngân định dạng ngày tháng năm">
+              <span class="vn-date-picker-btn" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              </span>
+              <input type="date" id="ldt" class="vn-date-native" aria-label="Chọn ngày giải ngân trên lịch">
             </div>
           </div>
         </div>
@@ -2006,7 +2037,43 @@
         `<option value="${i}"${r[3] === 12 ? ' selected' : ''}>${r[3]} tháng</option>`
       ).join('');
 
-      dt.value = todayISO;
+      function bindVNDateInput(txtEl, nativeEl, onDateChange) {
+        nativeEl.value = todayISO;
+        txtEl.value = formatVNDate(parseInputDate(todayISO));
+
+        nativeEl.addEventListener('change', () => {
+          if (nativeEl.value) {
+            txtEl.value = formatVNDate(parseInputDate(nativeEl.value));
+            onDateChange();
+          }
+        });
+
+        txtEl.addEventListener('input', () => {
+          const digits = txtEl.value.replace(/\D/g, '').slice(0, 8);
+          let formatted = digits;
+          if (digits.length > 4) {
+            formatted = `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+          } else if (digits.length > 2) {
+            formatted = `${digits.slice(0, 2)}/${digits.slice(2)}`;
+          }
+          txtEl.value = formatted;
+
+          if (digits.length === 8) {
+            const d = Number(digits.slice(0, 2));
+            const m = Number(digits.slice(2, 4));
+            const y = Number(digits.slice(4, 8));
+            const testDate = new Date(y, m - 1, d);
+            if (y >= 1990 && y <= 2100 && testDate.getFullYear() === y && testDate.getMonth() === m - 1 && testDate.getDate() === d) {
+              nativeEl.value = `${y}-${p2(m)}-${p2(d)}`;
+              onDateChange();
+            }
+          }
+        });
+
+        txtEl.addEventListener('blur', () => {
+          txtEl.value = formatVNDate(parseInputDate(nativeEl.value));
+        });
+      }
 
       function calcSavings() {
         const millions = Math.min(50000, Math.max(1, Number(amtNum.value) || 0));
@@ -2018,11 +2085,12 @@
         const days = diffDays(st, en);
         const interest = a * (rt / 100) * days / 365;
 
-        $('dtVn').textContent = formatVNDate(st);
         $('vA').textContent = fmt(a) + ' đ';
         $('oI').textContent = fmt(interest) + ' đ';
         $('oT').textContent = `Ngày gửi: ${formatVNDate(st)} • Ngày đến hạn: ${formatVNDate(en)} (${days} ngày thực tế) • Lãi suất: ${f2(rt)}%/năm. Tổng nhận gốc & lãi: ${fmt(a + interest)} đ`;
       }
+
+      bindVNDateInput($('dtTxt'), dt, calcSavings);
 
       amtRange.addEventListener('input', () => {
         amtNum.value = amtRange.value;
@@ -2033,14 +2101,13 @@
         amtRange.value = val;
         calcSavings();
       });
-      [tm, wh, dt].forEach(el => el.addEventListener('change', calcSavings));
+      [tm, wh].forEach(el => el.addEventListener('change', calcSavings));
       calcSavings();
 
       /* ----------------------------------------------------------------------
          7. CÔNG CỤ TÍNH KHOẢN VAY & BẢNG LỊCH TRẢ NỢ CHI TIẾT (dd/mm/yyyy)
          ---------------------------------------------------------------------- */
       const ld = $('ldt');
-      ld.value = todayISO;
       const lamtRange = $('lamt'), lamtNum = $('lamtNum');
       let latestScheduleText = '';
 
@@ -2053,7 +2120,7 @@
         const st = parseInputDate(ld.value);
         const endLoan = addMonths(st, n);
 
-        $('ldtVn').textContent = formatVNDate(st);
+        $('lA').textContent = fmt(P) + ' đ';
         $('lA').textContent = fmt(P) + ' đ';
         $('lT').textContent = n + ' tháng';
 
@@ -2098,7 +2165,8 @@
         calcLoan();
       });
       $('lterm').addEventListener('input', calcLoan);
-      ['lkind', 'lmode', 'ldt'].forEach(id => $(id).addEventListener('change', calcLoan));
+      bindVNDateInput($('ldtTxt'), ld, calcLoan);
+      ['lkind', 'lmode'].forEach(id => $(id).addEventListener('change', calcLoan));
       calcLoan();
 
       // Nút sao chép & in lịch trả nợ
