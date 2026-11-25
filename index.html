@@ -796,6 +796,24 @@
       outline: none;
     }
 
+    .date-input-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .date-vn-badge {
+      flex: none;
+      padding: 10px 13px;
+      border-radius: 12px;
+      background: var(--blue-soft);
+      border: 1.5px solid var(--line);
+      color: var(--blue);
+      font-size: 14.5px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
     .res {
       background: var(--bg2);
       border: 1.5px solid var(--line);
@@ -1367,8 +1385,13 @@
           </div>
 
           <div class="calc-field">
-            <div class="calc-head"><label for="dt">Ngày gửi tiền</label></div>
-            <input type="date" id="dt" aria-label="Ngày gửi tiền">
+            <div class="calc-head">
+              <label for="dt">Ngày gửi tiền (Ngày / Tháng / Năm)</label>
+            </div>
+            <div class="date-input-group">
+              <input type="date" id="dt" aria-label="Ngày gửi tiền">
+              <span class="date-vn-badge" id="dtVn">--/--/----</span>
+            </div>
           </div>
         </div>
 
@@ -1474,8 +1497,13 @@
           </div>
 
           <div class="calc-field">
-            <div class="calc-head"><label for="ldt">Ngày giải ngân</label></div>
-            <input type="date" id="ldt" aria-label="Ngày giải ngân">
+            <div class="calc-head">
+              <label for="ldt">Ngày giải ngân (Ngày / Tháng / Năm)</label>
+            </div>
+            <div class="date-input-group">
+              <input type="date" id="ldt" aria-label="Ngày giải ngân">
+              <span class="date-vn-badge" id="ldtVn">--/--/----</span>
+            </div>
           </div>
         </div>
 
@@ -1506,7 +1534,7 @@
             <thead>
               <tr>
                 <th>Kỳ</th>
-                <th>Ngày trả</th>
+                <th>Ngày trả (dd/mm/yyyy)</th>
                 <th>Gốc (đ)</th>
                 <th>Lãi (đ)</th>
                 <th>Tổng phải trả (đ)</th>
@@ -1903,7 +1931,46 @@
       updateScrollSpy();
 
       /* ----------------------------------------------------------------------
-         5. DỮ LIỆU LÃI SUẤT TIỀN GỬI (ÁP DỤNG TỪ 20/10/2026) & TÍNH LÃI TIẾT KIỆM
+         5. CHUẨN HÓA NGÀY THÁNG NĂM VIỆT NAM (dd/mm/yyyy) & HÀM TÍNH NGÀY
+         ---------------------------------------------------------------------- */
+      const p2 = n => String(n).padStart(2, '0');
+
+      // Chuyển đối tượng Date sang chuỗi chuẩn dd/mm/yyyy
+      function formatVNDate(dateObj) {
+        if (!(dateObj instanceof Date) || isNaN(dateObj)) return '--/--/----';
+        return `${p2(dateObj.getDate())}/${p2(dateObj.getMonth() + 1)}/${dateObj.getFullYear()}`;
+      }
+
+      // Chuyển chuỗi YYYY-MM-DD từ ô input[type="date"] sang Date giờ địa phương
+      function parseInputDate(val) {
+        if (!val || !/^\d{4}-\d{2}-\d{2}$/.test(val)) {
+          const now = new Date();
+          return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        }
+        const [y, m, d] = val.split('-').map(Number);
+        return new Date(y, m - 1, d);
+      }
+
+      // Cộng thêm m tháng giữ đúng ngày cuối tháng nếu tháng đích ít ngày hơn
+      function addMonths(d, m) {
+        const x = new Date(d.getFullYear(), d.getMonth() + m, 1);
+        const lastDay = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate();
+        x.setDate(Math.min(d.getDate(), lastDay));
+        return x;
+      }
+
+      // Tính số ngày thực tế chính xác giữa 2 mốc ngày (tránh sai lệch giờ mùa hè/UTC)
+      function diffDays(startDate, endDate) {
+        const utc1 = Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+        const utc2 = Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+        return Math.max(0, Math.round((utc2 - utc1) / 86400000));
+      }
+
+      const nowLocal = new Date();
+      const todayISO = `${nowLocal.getFullYear()}-${p2(nowLocal.getMonth() + 1)}-${p2(nowLocal.getDate())}`;
+
+      /* ----------------------------------------------------------------------
+         6. DỮ LIỆU LÃI SUẤT TIỀN GỬI (ÁP DỤNG TỪ 20/10/2026) & TÍNH LÃI TIẾT KIỆM
          ---------------------------------------------------------------------- */
       const D = [
         ["Gửi không kỳ hạn", 0.2, 0.2, 0],
@@ -1939,30 +2006,22 @@
         `<option value="${i}"${r[3] === 12 ? ' selected' : ''}>${r[3]} tháng</option>`
       ).join('');
 
-      const p2 = n => String(n).padStart(2, '0');
-      const todayStr = (d => `${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}`)(new Date());
-      dt.value = todayStr;
-
-      function addM(d, m) {
-        const x = new Date(d.getFullYear(), d.getMonth() + m, 1);
-        const lastDay = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate();
-        x.setDate(Math.min(d.getDate(), lastDay));
-        return x;
-      }
+      dt.value = todayISO;
 
       function calcSavings() {
-        const millions = Math.max(1, Number(amtNum.value) || 0);
+        const millions = Math.min(50000, Math.max(1, Number(amtNum.value) || 0));
         const a = millions * 1e6;
         const r = L[+tm.value];
         const rt = wh.value === 'tv' ? r[1] : r[2];
-        const st = dt.value ? new Date(dt.value + 'T00:00:00') : new Date();
-        const en = addM(st, r[3]);
-        const days = Math.round((en - st) / 864e5);
+        const st = parseInputDate(dt.value);
+        const en = addMonths(st, r[3]);
+        const days = diffDays(st, en);
         const interest = a * (rt / 100) * days / 365;
 
+        $('dtVn').textContent = formatVNDate(st);
         $('vA').textContent = fmt(a) + ' đ';
         $('oI').textContent = fmt(interest) + ' đ';
-        $('oT').textContent = `Lãi suất ${f2(rt)}%/năm • ${days} ngày thực tế (đến ${en.toLocaleDateString('vi-VN')}). Tổng nhận gốc & lãi: ${fmt(a + interest)} đ`;
+        $('oT').textContent = `Ngày gửi: ${formatVNDate(st)} • Ngày đến hạn: ${formatVNDate(en)} (${days} ngày thực tế) • Lãi suất: ${f2(rt)}%/năm. Tổng nhận gốc & lãi: ${fmt(a + interest)} đ`;
       }
 
       amtRange.addEventListener('input', () => {
@@ -1978,34 +2037,37 @@
       calcSavings();
 
       /* ----------------------------------------------------------------------
-         6. CÔNG CỤ TÍNH KHOẢN VAY & BẢNG LỊCH TRẢ NỢ CHI TIẾT
+         7. CÔNG CỤ TÍNH KHOẢN VAY & BẢNG LỊCH TRẢ NỢ CHI TIẾT (dd/mm/yyyy)
          ---------------------------------------------------------------------- */
       const ld = $('ldt');
-      ld.value = todayStr;
+      ld.value = todayISO;
       const lamtRange = $('lamt'), lamtNum = $('lamtNum');
       let latestScheduleText = '';
 
       function calcLoan() {
-        const millions = Math.max(1, Number(lamtNum.value) || 0);
+        const millions = Math.min(20000, Math.max(1, Number(lamtNum.value) || 0));
         const P = millions * 1e6;
         const n = +$('lterm').value;
         const rt = +$('lkind').value;
         const md = $('lmode').value;
-        const st = ld.value ? new Date(ld.value + 'T00:00:00') : new Date();
+        const st = parseInputDate(ld.value);
+        const endLoan = addMonths(st, n);
 
+        $('ldtVn').textContent = formatVNDate(st);
         $('lA').textContent = fmt(P) + ' đ';
         $('lT').textContent = n + ' tháng';
 
         let bal = P, prev = st, ti = 0, first = 0, rows = '';
         const textLines = [
           `LỊCH TRẢ NỢ DỰ KIẾN - QTDND ĐÔNG PHƯƠNG YÊN`,
-          `Số tiền vay: ${fmt(P)} đ | Thời hạn: ${n} tháng | Lãi suất: ${String(rt).replace('.', ',')}%/năm`,
-          `Kỳ | Ngày trả | Gốc (đ) | Lãi (đ) | Tổng phải trả (đ) | Dư nợ còn lại (đ)`
+          `Ngày giải ngân: ${formatVNDate(st)} | Ngày đáo hạn: ${formatVNDate(endLoan)}`,
+          `Số tiền vay: ${fmt(P)} đ | Thời hạn: ${n} tháng | Lãi suất: ${f2(rt)}%/năm`,
+          `Kỳ | Ngày trả (dd/mm/yyyy) | Gốc (đ) | Lãi (đ) | Tổng phải trả (đ) | Dư nợ còn lại (đ)`
         ];
 
         for (let k = 1; k <= n; k++) {
-          const d = addM(st, k);
-          const days = Math.round((d - prev) / 864e5);
+          const d = addMonths(st, k);
+          const days = diffDays(prev, d);
           const i = bal * (rt / 100) * days / 365;
           const g = k === n ? bal : (md === 'g' ? Math.round(P / n) : 0);
           const pay = g + i;
@@ -2014,15 +2076,15 @@
           bal = Math.max(0, bal - g);
           prev = d;
 
-          const dStr = d.toLocaleDateString('vi-VN');
+          const dStr = formatVNDate(d);
           rows += `<tr><td>${k}</td><td>${dStr}</td><td>${fmt(g)}</td><td>${fmt(i)}</td><td>${fmt(pay)}</td><td>${fmt(bal)}</td></tr>`;
           textLines.push(`${k} | ${dStr} | ${fmt(g)} | ${fmt(i)} | ${fmt(pay)} | ${fmt(bal)}`);
         }
 
         latestScheduleText = textLines.join('\n');
         $('lF').textContent = fmt(first) + ' đ';
-        $('lS').textContent = `Tổng tiền lãi dự kiến: ${fmt(ti)} đ`;
-        $('lS2').textContent = `Tổng gốc và lãi: ${fmt(P + ti)} đ (lãi suất ${String(rt).replace('.', ',')}%/năm)`;
+        $('lS').textContent = `Tổng tiền lãi dự kiến: ${fmt(ti)} đ (Giải ngân: ${formatVNDate(st)} – Đáo hạn: ${formatVNDate(endLoan)})`;
+        $('lS2').textContent = `Tổng gốc và lãi: ${fmt(P + ti)} đ (lãi suất ${f2(rt)}%/năm)`;
         $('lrows').innerHTML = rows;
       }
 
@@ -2048,7 +2110,7 @@
       });
 
       /* ----------------------------------------------------------------------
-         7. XỬ LÝ BIỂU MẪU ĐĂNG KÝ TƯ VẤN & SAO CHÉP ĐỊA CHỈ
+         8. XỬ LÝ BIỂU MẪU ĐĂNG KÝ TƯ VẤN & SAO CHÉP ĐỊA CHỈ
          ---------------------------------------------------------------------- */
       $('copyAddrBtn').addEventListener('click', () => {
         copyTextSafe(
